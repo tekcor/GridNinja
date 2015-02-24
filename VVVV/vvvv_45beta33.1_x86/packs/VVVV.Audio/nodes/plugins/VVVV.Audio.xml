@@ -1,0 +1,893 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>VVVV.Audio</name>
+    </assembly>
+    <members>
+        <member name="T:VVVV.Audio.AudioSignal">
+            <summary>
+            Base class for signals which just generate audio
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.AudioSignalBase">
+            <summary>
+            General base class for all audio signals
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.AudioSignalBase.TakeOwnership(System.Object)">
+            <summary>
+            If a class wants to call buffers not synced to the engine,
+            it can register itself with this method
+            </summary>
+            <param name="newOwner"></param>
+        </member>
+        <member name="M:VVVV.Audio.AudioSignalBase.ReleaseOwnership(System.Object)">
+            <summary>
+            Sets the sync owner back to the engine
+            </summary>
+            <param name="currentOwner">The owner which wants to be released</param>
+        </member>
+        <member name="M:VVVV.Audio.AudioSignalBase.Reset(System.Object)">
+            <summary>
+            Tells the signal that this frame is over and it should calculate a new buffer
+            </summary>
+            <param name="owner"></param>
+        </member>
+        <member name="T:VVVV.Audio.ICanCopyBuffer">
+            <summary>
+            Interface which provides buffer copy of the output.
+            This is needed when multiple signals have the output as input,
+            so the stream does not advance during frames.
+            </summary>
+        </member>
+        <member name="F:VVVV.Audio.AudioSignal.SampleRate">
+            <summary>
+            Current sample rate as set by the engine
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.AudioSignal.FillBuffer(System.Single[],System.Int32,System.Int32)">
+            <summary>
+            This method should be overwritten in the sub class to do the actual processing work
+            </summary>
+            <param name="buffer">The buffer to fill</param>
+            <param name="offset">Write offset for the buffer</param>
+            <param name="count">Count of samples need</param>
+        </member>
+        <member name="M:VVVV.Audio.AudioEngine.ChangeDriverSettings(System.String,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes the Audio Driver if necessary
+            </summary>
+            <param name="driverName"></param>
+            <param name="sampleRate"></param>
+            <param name="inputChannels"></param>
+            <param name="inputChannelOffset"></param>
+            <param name="outputChannels"></param>
+            <param name="outputChannelOffset"></param>
+        </member>
+        <member name="M:VVVV.Audio.AudioEngine.GetInputBuffers(System.Single[][],NAudio.Wave.AsioAudioAvailableEventArgs)">
+            <summary>
+            Converts all the recorded audio into a buffer of 32 bit floating point samples
+            </summary>
+            <samples>The samples as 32 bit floating point, interleaved</samples>
+        </member>
+        <member name="P:VVVV.Audio.AudioEngine.InputBuffers">
+            <summary>
+            the buffers from the audio input
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.AudioEngine.NeedsReset">
+            <summary>
+            If this is true the engine driver should be reset
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.AudioService">
+            <summary>
+            Static and naive access to the AudioEngine
+            TODO: find better life time management
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.AudioSignalInput">
+            <summary>
+            Base class for audio signals with input
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.AudioSignalInput.InputWasSet(VVVV.Audio.AudioSignal)">
+            <summary>
+            Override in sub class to know when the input has changed
+            </summary>
+            <param name="newInput"></param>
+        </member>
+        <member name="P:VVVV.Audio.AudioSignalInput.Input">
+            <summary>
+            The input signal
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.AudioSignalSpread`1">
+            <summary>
+            A generic spread of audio signals
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.AudioSignalSpread">
+            <summary>
+            A spread of audio signals
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.MasterChannel">
+            <summary>
+            A combination of audio signal and the driver output channel number
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.MasterWaveProvider">
+            <summary>
+            Helper class for when you need to convert back to an IWaveProvider from
+            an ISampleProvider. Keeps it as IEEE float
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.MasterWaveProvider.#ctor(NAudio.Wave.WaveFormat,System.Action{System.Int32})">
+            <summary>
+            Initializes a new instance of the WaveProviderFloatToWaveProvider class
+            </summary>
+            <param name="source">Source wave provider</param>
+        </member>
+        <member name="F:VVVV.Audio.MasterWaveProvider.FMixerBuffer">
+            <summary>
+            Reads from this provider
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.MasterWaveProvider.WaveFormat">
+            <summary>
+            The waveformat of this WaveProvider (same as the source)
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.MultiChannelSignal">
+            <summary>
+            Processes multiple audio signals
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.MultiChannelSignal.FillBuffers(System.Single[][],System.Int32,System.Int32)">
+            <summary>
+            Does the actual work
+            </summary>
+            <param name="buffers"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:VVVV.Audio.MultiChannelInputSignal.InputWasSet(VVVV.PluginInterfaces.V2.ISpread{VVVV.Audio.AudioSignal})">
+            <summary>
+            Override in sub class to know when the input has changed
+            </summary>
+            <param name="newInput"></param>
+        </member>
+        <member name="P:VVVV.Audio.MultiChannelInputSignal.Input">
+            <summary>
+            The input signal
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.IAudioSink">
+            <summary>
+            Interface which the audio engine will call for each buffer after its registered
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.SinkSignal`1">
+            <summary>
+            Base class for all sink signals which have no audio output
+            </summary>
+        </member>
+        <member name="M:VVVV.Nodes.CommonAudioNodeBase.AnyInputChanged">
+            <summary>
+            Should return whether new parameters need to be set on the audio signals
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VVVV.Nodes.AudioNodeBase`1.GetSpreadMax(System.Int32)">
+            <summary>
+            Override this in subclass if you want to set the number of output signals manually
+            </summary>
+            <param name="originalSpreadMax"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VVVV.Nodes.AudioNodeBase`1.GetInstance(System.Int32)">
+            <summary>
+            This should return a new instance of the desired audio signal class
+            </summary>
+            <param name="i">The current slice index of the output signal</param>
+            <returns>New instnace of the audio signal class</returns>
+        </member>
+        <member name="M:VVVV.Nodes.AudioNodeBase`1.SetParameters(System.Int32,`0)">
+            <summary>
+            This should set the parameters of the given audio signal class
+            </summary>
+            <param name="i">Current index of the output signal spread</param>
+            <param name="instance">Curretn instance</param>
+        </member>
+        <member name="T:VVVV.Nodes.GenericAudioSinkNode`2">
+            <summary>
+            Base class for audio sink nodes
+            </summary>
+        </member>
+        <member name="T:VVVV.Nodes.GenericAudioSinkNodeWithOutputs`2">
+            <summary>
+            Base class for audio sink nodes with outputs
+            </summary>
+        </member>
+        <member name="M:VVVV.Nodes.GenericAudioSinkNodeWithOutputs`2.SetOutputs(System.Int32,`0)">
+            <summary>
+            Set the output pins of the node
+            </summary>
+            <param name="i">Current slice index</param>
+            <param name="instance">Current instance</param>
+        </member>
+        <member name="M:VVVV.Nodes.GenericAudioSinkNodeWithOutputs`2.SetOutputSliceCount(System.Int32)">
+            <summary>
+            In this method the slicecount of the output pins should be set
+            </summary>
+            <param name="sliceCount"></param>
+        </member>
+        <member name="T:VVVV.Nodes.GenericAudioSourceNode`1">
+            <summary>
+            Audio source nodes
+            </summary>
+        </member>
+        <member name="T:VVVV.Nodes.GenericAudioFilterNode`1">
+            <summary>
+            Base class for audio filter nodes 
+            </summary>
+        </member>
+        <member name="T:VVVV.Nodes.GenericAudioSourceNodeWithOutputs`1">
+            <summary>
+            Audio source node with output pins
+            </summary>
+        </member>
+        <member name="M:VVVV.Nodes.GenericAudioSourceNodeWithOutputs`1.SetOutputs(System.Int32,`0)">
+            <summary>
+            Set the output pins of the node
+            </summary>
+            <param name="i">Current slice index</param>
+            <param name="instance">Current instance</param>
+        </member>
+        <member name="M:VVVV.Nodes.GenericAudioSourceNodeWithOutputs`1.SetOutputSliceCount(System.Int32)">
+            <summary>
+            In this method the slicecount of the output pins should be set
+            </summary>
+            <param name="sliceCount"></param>
+        </member>
+        <member name="T:VVVV.Nodes.GenericAudioFilterNodeWithOutputs`1">
+            <summary>
+            Base class for audio filter nodes which have value output pins
+            </summary>
+        </member>
+        <member name="T:VVVV.Nodes.GenericMultiAudioSourceNode`1">
+            <summary>
+            Audio node base class with multichannel signals and automatic instance handling
+            </summary>
+        </member>
+        <member name="T:VVVV.Nodes.GenericMultiAudioSourceNodeWithOutputs`1">
+            <summary>
+            Audio node base class with multichannel signals and automatic instance handling and value outputs
+            </summary>
+        </member>
+        <member name="M:VVVV.Nodes.GenericMultiAudioSourceNodeWithOutputs`1.SetOutputs(System.Int32,`0)">
+            <summary>
+            Set the output pins of the node
+            </summary>
+            <param name="i">Current slice index</param>
+            <param name="instance">Current instance</param>
+        </member>
+        <member name="M:VVVV.Nodes.GenericMultiAudioSourceNodeWithOutputs`1.SetOutputSliceCount(System.Int32)">
+            <summary>
+            In this method the slicecount of the output pins should be set
+            </summary>
+            <param name="sliceCount"></param>
+        </member>
+        <member name="T:VVVV.Nodes.BufferAudioSignal">
+            <summary>
+            Base class for nodes which work with buffers
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.CircularPullBuffer">
+            <summary>
+            A very basic circular buffer implementation
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.CircularPullBuffer.#ctor(System.Int32)">
+            <summary>
+            Create a new circular buffer
+            </summary>
+            <param name="size">Max buffer size in samples</param>
+        </member>
+        <member name="M:VVVV.Audio.CircularPullBuffer.Write(System.Single[],System.Int32,System.Int32)">
+            <summary>
+            Write data to the buffer
+            </summary>
+            <param name="data">Data to write</param>
+            <param name="offset">Offset into data</param>
+            <param name="count">Number of bytes to write</param>
+            <returns>number of bytes written</returns>
+        </member>
+        <member name="M:VVVV.Audio.CircularPullBuffer.Pull(System.Int32)">
+            <summary>
+            Pulls a specified amount of samples from the input.
+            </summary>
+            <param name="count"></param>
+        </member>
+        <member name="M:VVVV.Audio.CircularPullBuffer.Read(System.Single[],System.Int32,System.Int32)">
+            <summary>
+            Read from the buffer
+            </summary>
+            <param name="data">Buffer to read into</param>
+            <param name="offset">Offset into read buffer</param>
+            <param name="count">Bytes to read</param>
+            <returns>Number of bytes actually read</returns>
+        </member>
+        <member name="M:VVVV.Audio.CircularPullBuffer.Reset">
+            <summary>
+            Resets the buffer
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.CircularPullBuffer.Advance(System.Int32)">
+            <summary>
+            Advances the buffer, discarding bytes
+            </summary>
+            <param name="count">Bytes to advance</param>
+        </member>
+        <member name="P:VVVV.Audio.CircularPullBuffer.PullCount">
+            <summary>
+            The amount of data to be pulled
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.CircularPullBuffer.MaxLength">
+            <summary>
+            Maximum length of this circular buffer
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.CircularPullBuffer.Count">
+            <summary>
+            Number of bytes currently stored in the circular buffer
+            </summary>
+        </member>
+        <member name="P:VVVV.Nodes.ResampleSignal.Latency">
+            <summary>
+            The converter input latency
+            </summary>
+        </member>
+        <member name="T:VVVV.Nodes.ResampleNode">
+            <summary>
+            Description of ResampleFilter.
+            </summary>
+        </member>
+        <member name="T:VVVV.Nodes.WaveTableSignal">
+            <summary>
+            Class for LUT playback
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.VST.HostCommandStub">
+            <summary>
+            The HostCommandStub class represents the part of the host that a plugin can call.
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.BeginEdit(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.CanDo(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.CloseFileSelector(Jacobi.Vst.Core.VstFileSelect)">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.EndEdit(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetAutomationState">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetBlockSize">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetDirectory">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetInputLatency">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetLanguage">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetOutputLatency">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetProcessLevel">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetProductString">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetSampleRate">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetTimeInfo(Jacobi.Vst.Core.VstTimeInfoFlags)">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetVendorString">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetVendorVersion">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.IoChanged">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.OpenFileSelector(Jacobi.Vst.Core.VstFileSelect)">
+            <inheritdoc />
+        </member>
+        <member name="F:VVVV.Audio.VST.HostCommandStub.FProcessEventsAction">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.SizeWindow(System.Int32,System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.UpdateDisplay">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetCurrentPluginID">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.GetVersion">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.ProcessIdle">
+            <inheritdoc />
+        </member>
+        <member name="M:VVVV.Audio.VST.HostCommandStub.SetParameterAutomated(System.Int32,System.Single)">
+            <inheritdoc />
+        </member>
+        <member name="E:VVVV.Audio.VST.HostCommandStub.PluginCalled">
+            <summary>
+            Raised when one of the methods is called.
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.VST.HostCommandStub.PluginContext">
+            <inheritdoc />
+        </member>
+        <member name="T:VVVV.Audio.VST.PluginCalledEventArgs">
+            <summary>
+            Event arguments used when one of the mehtods is called.
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.VST.PluginCalledEventArgs.#ctor(System.String)">
+            <summary>
+            Constructs a new instance with a <paramref name="message"/>.
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="P:VVVV.Audio.VST.PluginCalledEventArgs.Message">
+            <summary>
+            Gets the message.
+            </summary>
+        </member>
+        <member name="F:VVVV.Audio.VST.PluginInfoForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.VST.PluginInfoForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:VVVV.Audio.VST.PluginInfoForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:VVVV.Nodes.VSTHostNode.AnyInputChanged">
+            <summary>
+            Should return whether new parameters need to be set on the audio signals
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:VVVV.Nodes.VSTHostNode.GetSpreadMax(System.Int32)">
+            <summary>
+            Override this in subclass if you want to set the number of output signals manually
+            </summary>
+            <param name="originalSpreadMax"></param>
+            <returns></returns>
+        </member>
+        <member name="M:VVVV.Nodes.VSTHostNode.GetInstance(System.Int32)">
+            <summary>
+            This should return a new instance of the desired audio signal class
+            </summary>
+            <param name="i">The current slice index of the output signal</param>
+            <returns>New instnace of the audio signal class</returns>
+        </member>
+        <member name="M:VVVV.Nodes.VSTHostNode.SetParameters(System.Int32,VVVV.Audio.VST.VSTSignal)">
+            <summary>
+            This should set the parameters of the given audio signal class
+            </summary>
+            <param name="i">Current index of the output signal spread</param>
+            <param name="instance">Curretn instance</param>
+        </member>
+        <member name="M:VVVV.Nodes.VSTHostNode.SetOutputs(System.Int32,VVVV.Audio.VST.VSTSignal)">
+            <summary>
+            Set the output pins of the node
+            </summary>
+            <param name="i">Current slice index</param>
+            <param name="instance">Current instance</param>
+        </member>
+        <member name="M:VVVV.Nodes.VSTHostNode.SetOutputSliceCount(System.Int32)">
+            <summary>
+            In this method the slicecount of the output pins should be set
+            </summary>
+            <param name="sliceCount"></param>
+        </member>
+        <member name="T:VVVV.Nodes.Nodes.VST.VstPluginControl">
+            <summary>
+            Description of VstPluginControl.
+            </summary>
+        </member>
+        <member name="F:VVVV.Nodes.Nodes.VST.VstPluginControl.components">
+            <summary>
+            Designer variable used to keep track of non-visual components.
+            </summary>
+        </member>
+        <member name="M:VVVV.Nodes.Nodes.VST.VstPluginControl.Dispose(System.Boolean)">
+            <summary>
+            Disposes resources used by the control.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:VVVV.Nodes.Nodes.VST.VstPluginControl.InitializeComponent">
+            <summary>
+            This method is required for Windows Forms designer support.
+            Do not change the method contents inside the source code editor. The Forms designer might
+            not be able to load this method if it was changed manually.
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.AudioUtils">
+            <summary>
+            Audio helpers, all audio samples are considered float32 in the range [-1..1]
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.AudioUtils.HammingWindow(System.Int32,System.Int32)">
+            <summary>
+            Applies a Hamming Window
+            </summary>
+            <param name="n">Index into frame</param>
+            <param name="frameSize">Frame size (e.g. 1024)</param>
+            <returns>Multiplier for Hamming window</returns>
+        </member>
+        <member name="M:VVVV.Audio.AudioUtils.HannWindow(System.Int32,System.Int32)">
+            <summary>
+            Applies a Hann Window
+            </summary>
+            <param name="n">Index into frame</param>
+            <param name="frameSize">Frame size (e.g. 1024)</param>
+            <returns>Multiplier for Hann window</returns>
+        </member>
+        <member name="M:VVVV.Audio.AudioUtils.BlackmannHarrisWindow(System.Int32,System.Int32)">
+            <summary>
+            Applies a Blackman-Harris Window
+            </summary>
+            <param name="n">Index into frame</param>
+            <param name="frameSize">Frame size (e.g. 1024)</param>
+            <returns>Multiplier for Blackmann-Harris window</returns>
+        </member>
+        <member name="T:VVVV.Audio.R8BrainResamplerResolution">
+            <summary>
+            Selects the resampler resolution
+            </summary>
+        </member>
+        <member name="F:VVVV.Audio.R8BrainResamplerResolution.R8Brain16">
+            <summary>
+            16-bit precision resampler
+            </summary>
+        </member>
+        <member name="F:VVVV.Audio.R8BrainResamplerResolution.R8Brain16IR">
+            <summary>
+            16-bit precision resampler for impulse responses
+            </summary>
+        </member>
+        <member name="F:VVVV.Audio.R8BrainResamplerResolution.R8Brain24">
+            <summary>
+            24-bit precision resampler (including 32-bit floating point)
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.R8BrainSampleRateConverter">
+            <summary>
+            Managed wrapper class for the high quality sample rate converter r8brain from Aleksey Vaneev of Voxengo
+            </summary>
+        </member>
+        <member name="F:VVVV.Audio.R8BrainSampleRateConverter.FUnmanagedInstance">
+            <summary>
+            Reference to the actual unmanaged resampler
+            </summary>
+        </member>
+        <member name="F:VVVV.Audio.R8BrainSampleRateConverter.FOutBufferPtr">
+            <summary>
+            This will receive the pointer to the output buffer, reusing it as recommeded
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.R8BrainSampleRateConverter.#ctor(System.Double,System.Double,System.Int32,System.Double,VVVV.Audio.R8BrainResamplerResolution)">
+            <summary>
+            Function creates a new linear-phase resampler object
+            </summary>
+            
+            <param name="srcSampleRate">Source signal sample rate. Both sample rates can be 
+            specified as a ratio, e.g. SrcSampleRate = 1.0, DstSampleRate = 2.0.</param>
+            
+            <param name="dstSampleRate">Destination signal sample rate</param>
+            
+            <param name="maxInputBufferLength">The maximal planned length of the input buffer (in samples) 
+            that will be passed to the resampler. The resampler relies on this value as
+            it allocates intermediate buffers. Input buffers longer than this value
+            should never be supplied to the resampler. Note that the resampler may use
+            the input buffer itself for intermediate sample data storage.</param>
+            
+            <param name="reqTransBand">Required transition band, in percent of the
+            spectral space of the input signal (or the output signal if
+            downsampling is performed) between filter's -3 dB point and the Nyquist
+            frequency. The range is from CDSPFIRFilter::getLPMinTransBand() to
+            CDSPFIRFilter::getLPMaxTransBand(), inclusive. When upsampling 88200 or
+            96000 audio to a higher sample rates the ReqTransBand can be
+            considerably increased, up to 30. The selection of ReqTransBand depends
+            on the level of desire to preserve the high-frequency content. While
+            values 0.5 to 2 are extremely "greedy" settings, not necessary in most
+            cases, values 2 to 3 can be used in most cases. Values 3 to 4 are
+            relaxed settings, but they still offer a flat frequency response up to
+            21kHz with 44.1k source or destination sample rate.</param>
+            
+            <param name="resolution">Resampler's required resolution</param>
+        </member>
+        <member name="M:VVVV.Audio.R8BrainSampleRateConverter.Clear">
+            <summary>
+            Function clears (resets) the state of the resampler object and returns it 
+            to the state after construction. All input data accumulated in the
+            internal buffer of this resampler object so far will be discarded.
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.R8BrainSampleRateConverter.Process(System.Double[],System.Double[]@)">
+            <summary>
+            Function performs sample rate conversion.
+            If the source and destination sample rates are equal, the resampler will do
+            nothing and will simply return the input buffer unchanged.
+            
+            You do not need to allocate an intermediate output buffer for use with this
+            function. If required, the resampler will allocate a suitable intermediate
+            output buffer itself.
+            </summary>
+            
+            <param name="input">Input buffer. This buffer may be used as output buffer by this function.</param>
+            
+            <param name="output">This variable receives the pointer to the resampled data.
+            This pointer may point to the address within the "ip0" input buffer, or to
+            *this object's internal buffer. In real-time applications it is suggested
+            to pass this pointer to the next output audio block and consume any data
+            left from the previous output audio block first before calling the
+            process() function again. The buffer pointed to by the "op0" on return may
+            be owned by the resampler, so it should not be freed by the caller.</param>
+            
+            <returns>The number of samples available in the output buffer. If the
+            data from the output buffer is going to be written to a bigger output
+            buffer, it is suggested to check the returned number of samples so that no
+            overflow of the bigger output buffer happens.</returns>
+        </member>
+        <member name="P:VVVV.Audio.R8BrainSampleRateConverter.SourcRate">
+            <summary>
+            The source rate set on creation
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.R8BrainSampleRateConverter.DestinationRate">
+            <summary>
+            The destination rate set on creation
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.R8BrainSampleRateConverter.RequiredTransitionBand">
+            <summary>
+            Required transition band, in percent of the
+            spectral space of the input signal (or the output signal if
+            downsampling is performed) between filter's -3 dB point and the Nyquist
+            frequency.
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.R8BrainSampleRateConverter.Latency">
+            <summary>
+            Returns the number of samples that should be passed to the resampler object before the actual output starts
+            </summary>
+        </member>
+        <member name="T:VVVV.Audio.R8BrainDLLWrapper">
+            <summary>
+            Static wrapper for the r8bsrc.dll
+            </summary>
+        </member>
+        <member name="T:Lomont.LomontFFT">
+            <summary>                                                                                                
+            Represent a class that performs real or complex valued Fast Fourier                                      
+            Transforms. Instantiate it and use the FFT or TableFFT methods to                                        
+            compute complex to complex FFTs. Use FFTReal for real to complex                                         
+            FFTs which are much faster than standard complex to complex FFTs.                                        
+            Properties A and B allow selecting various FFT sign and scaling                                          
+            conventions.                                                                                             
+            </summary>                                                                                               
+        </member>
+        <member name="M:Lomont.LomontFFT.FFT(System.Double[],System.Boolean)">
+            <summary>                                                                                            
+            Compute the forward or inverse Fourier Transform of data, with                                       
+            data containing complex valued data as alternating real and                                          
+            imaginary parts. The length must be a power of 2. The data is                                        
+            modified in place.                                                                                   
+            </summary>                                                                                           
+            <param name="data">The complex data stored as alternating real                                       
+            and imaginary parts</param>                                                                          
+            <param name="forward">true for a forward transform, false for                                        
+            inverse transform</param>                                                                            
+        </member>
+        <member name="M:Lomont.LomontFFT.TableFFT(System.Double[],System.Boolean)">
+            <summary>                                                                                            
+            Compute the forward or inverse Fourier Transform of data, with data                                  
+            containing complex valued data as alternating real and imaginary                                     
+            parts. The length must be a power of 2. This method caches values                                    
+            and should be slightly faster on than the FFT method for repeated uses.                              
+            It is also slightly more accurate. Data is transformed in place.                                     
+            </summary>                                                                                           
+            <param name="data">The complex data stored as alternating real                                       
+            and imaginary parts</param>                                                                          
+            <param name="forward">true for a forward transform, false for                                        
+            inverse transform</param>                                                                            
+        </member>
+        <member name="M:Lomont.LomontFFT.RealFFT(System.Double[],System.Boolean)">
+            <summary>                                                                                            
+            Compute the forward or inverse Fourier Transform of data, with                                       
+            data containing real valued data only. The output is complex                                         
+            valued after the first two entries, stored in alternating real                                       
+            and imaginary parts. The first two returned entries are the real                                     
+            parts of the first and last value from the conjugate symmetric                                       
+            output, which are necessarily real. The length must be a power                                       
+            of 2.                                                                                                
+            </summary>                                                                                           
+            <param name="data">The complex data stored as alternating real                                       
+            and imaginary parts</param>                                                                          
+            <param name="forward">true for a forward transform, false for                                        
+            inverse transform</param>                                                                            
+        </member>
+        <member name="M:Lomont.LomontFFT.Scale(System.Double[],System.Int32,System.Boolean)">
+            <summary>                                                                                            
+            Scale data using n samples for forward and inverse transforms as needed                              
+            </summary>                                                                                           
+            <param name="data"></param>                                                                          
+            <param name="n"></param>                                                                             
+            <param name="forward"></param>                                                                       
+        </member>
+        <member name="M:Lomont.LomontFFT.Initialize(System.Int32)">
+            <summary>                                                                                            
+            Call this with the size before using the TableFFT version                                            
+            Fills in tables for speed. Done automatically in TableFFT                                            
+            </summary>                                                                                           
+            <param name="size">The size of the FFT in samples</param>                                            
+        </member>
+        <member name="M:Lomont.LomontFFT.Reverse(System.Double[],System.Int32)">
+            <summary>                                                                                            
+            Swap data indices whenever index i has binary                                                        
+            digits reversed from index j, where data is                                                          
+            two doubles per index.                                                                               
+            </summary>                                                                                           
+            <param name="data"></param>                                                                          
+            <param name="n"></param>                                                                             
+        </member>
+        <member name="F:Lomont.LomontFFT.cosTable">
+            <summary>                                                                                            
+            Pre-computed sine/cosine tables for speed                                                            
+            </summary>                                                                                           
+        </member>
+        <member name="P:Lomont.LomontFFT.A">
+            <summary>                                                                                            
+            Determine how scaling works on the forward and inverse transforms.                                   
+            For size N=2^n transforms, the forward transform gets divided by                                     
+            N^((1-a)/2) and the inverse gets divided by N^((1+a)/2). Common                                      
+            values for (A,B) are                                                                                 
+                ( 0, 1)  - default                                                                               
+                (-1, 1)  - data processing                                                                       
+                ( 1,-1)  - signal processing                                                                     
+            Usual values for A are 1, 0, or -1                                                                   
+            </summary>                                                                                           
+        </member>
+        <member name="P:Lomont.LomontFFT.B">
+            <summary>                                                                                            
+            Determine how phase works on the forward and inverse transforms.                                     
+            For size N=2^n transforms, the forward transform uses an                                             
+            exp(B*2*pi/N) term and the inverse uses an exp(-B*2*pi/N) term.                                      
+            Common values for (A,B) are                                                                          
+                ( 0, 1)  - default                                                                               
+                (-1, 1)  - data processing                                                                       
+                ( 1,-1)  - signal processing                                                                     
+            Abs(B) should be relatively prime to N.                                                              
+            Setting B=-1 effectively corresponds to conjugating both input and                                   
+            output data.                                                                                         
+            Usual values for B are 1 or -1.                                                                      
+            </summary>                                                                                           
+        </member>
+        <member name="T:VVVV.Audio.AudioFileReaderVVVV">
+            <summary>
+            AudioFileReader simplifies opening an audio file in NAudio
+            Simply pass in the filename, and it will attempt to open the
+            file and set up a conversion path that turns into PCM IEEE float.
+            ACM codecs will be used for conversion.
+            It provides a volume property and implements both WaveStream and
+            ISampleProvider, making it possibly the only stage in your audio
+            pipeline necessary for simple playback scenarios
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.AudioFileReaderVVVV.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of AudioFileReader
+            </summary>
+            <param name="fileName">The file to open</param>
+        </member>
+        <member name="M:VVVV.Audio.AudioFileReaderVVVV.CreateReaderStream(System.String,System.Boolean)">
+            <summary>
+            Creates the reader stream, supporting all filetypes in the core NAudio library,
+            and ensuring we are in PCM format
+            </summary>
+            <param name="fileName">File Name</param>
+        </member>
+        <member name="M:VVVV.Audio.AudioFileReaderVVVV.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads from this wave stream
+            </summary>
+            <param name="buffer">Audio buffer</param>
+            <param name="offset">Offset into buffer</param>
+            <param name="count">Number of bytes required</param>
+            <returns>Number of bytes read</returns>
+        </member>
+        <member name="M:VVVV.Audio.AudioFileReaderVVVV.Read(System.Single[],System.Int32,System.Int32)">
+            <summary>
+            Reads audio from this sample provider
+            </summary>
+            <param name="buffer">Sample buffer</param>
+            <param name="offset">Offset into sample buffer</param>
+            <param name="count">Number of samples required</param>
+            <returns>Number of samples read</returns>
+        </member>
+        <member name="M:VVVV.Audio.AudioFileReaderVVVV.SourceToDest(System.Int64)">
+            <summary>
+            Helper to convert source to dest bytes
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.AudioFileReaderVVVV.DestToSource(System.Int64)">
+            <summary>
+            Helper to convert dest to source bytes
+            </summary>
+        </member>
+        <member name="M:VVVV.Audio.AudioFileReaderVVVV.Dispose(System.Boolean)">
+            <summary>
+            Disposes this AudioFileReader
+            </summary>
+            <param name="disposing">True if called from Dispose</param>
+        </member>
+        <member name="P:VVVV.Audio.AudioFileReaderVVVV.WaveFormat">
+            <summary>
+            WaveFormat of this stream
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.AudioFileReaderVVVV.Length">
+            <summary>
+            Length of this stream (in bytes)
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.AudioFileReaderVVVV.Position">
+            <summary>
+            Position of this stream (in bytes)
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.AudioFileReaderVVVV.Volume">
+            <summary>
+            Gets or Sets the Volume of this AudioFileReader. 1.0f is full volume
+            </summary>
+        </member>
+        <member name="P:VVVV.Audio.WaveProviderToWaveStream.Length">
+            <summary>
+            Don't know the real length of the source, just return a big number
+            </summary>
+        </member>
+    </members>
+</doc>
