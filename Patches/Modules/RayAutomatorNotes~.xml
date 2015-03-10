@@ -1,5 +1,5 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta33.1.dtd" >
-   <PATCH nodename="E:\GridNinja\Patches\modules\RayAutomatorNotes.v4p" systemname="RayAutomatorNotes" filename="E:\TekcorLivePerformance_Debug_16\Thirdparty\GridNinja\Modules\RayAutomatorNotes.v4p" scrollx="5010" scrolly="16485">
+   <PATCH nodename="E:\GridNinja\Patches\modules\RayAutomatorNotes.v4p" systemname="RayAutomatorNotes" filename="E:\TekcorLivePerformance_Debug_16\Thirdparty\GridNinja\Modules\RayAutomatorNotes.v4p" scrollx="5010" scrolly="-360">
    <BOUNDS type="Window" left="720" top="5850" width="27525" height="11130">
    </BOUNDS>
    <NODE id="166" nodename="LinearSpread (Spreads)" systemname="LinearSpread (Spreads)">
@@ -588,16 +588,6 @@
    </LINK>
    <LINK srcnodeid="101" srcpinname="Output" dstnodeid="134" dstpinname="ScaleY">
    </LINK>
-   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="100">
-   <BOUNDS type="Node" left="14400" top="1095" width="100" height="100">
-   </BOUNDS>
-   <BOUNDS type="Box" left="14400" top="1095" width="795" height="240">
-   </BOUNDS>
-   <PIN pinname="Descriptive Name" slicecount="1" values="|Change App|">
-   </PIN>
-   <PIN pinname="Y Output Value" visible="1">
-   </PIN>
-   </NODE>
    <LINK srcnodeid="120" srcpinname="Y Output Value" dstnodeid="118" dstpinname="Input">
    </LINK>
    <LINK srcnodeid="103" srcpinname="Output" dstnodeid="155" dstpinname="ScaleX">

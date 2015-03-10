@@ -1,5 +1,5 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta33.1.dtd" >
-   <PATCH nodename="E:\GridNinja\Patches\Modules\Faders.v4p" systemname="Faders" filename="E:\GridNinja\Patches\Modules\Faders.v4p" scrollx="0" scrolly="0">
+   <PATCH nodename="E:\GridNinja\Patches\modules\Faders.v4p" systemname="Faders" filename="E:\GridNinja\Patches\Modules\Faders.v4p" scrollx="1500" scrolly="2175">
    <NODE id="0" nodename="LinearSpread (Spreads)" systemname="LinearSpread (Spreads)">
    <BOUNDS height="0" left="3180" top="12015" type="Node" width="0">
    </BOUNDS>
@@ -589,9 +589,9 @@
    </BOUNDS>
    <PIN pinname="Value" visible="1">
    </PIN>
-   <PIN pinname="Do Send" visible="1" slicecount="120" values="0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0">
+   <PIN pinname="Do Send" visible="1" slicecount="1" values="0">
    </PIN>
-   <PIN pinname="Midi Output Port" slicecount="1" values="|LoopBe Internal MIDI|" visible="1">
+   <PIN pinname="Midi Output Port" slicecount="1" visible="1" values="|LoopBe Internal MIDI|">
    </PIN>
    <PIN pinname="Channel" visible="1">
    </PIN>
@@ -733,26 +733,6 @@
    <LINK srcnodeid="87" srcpinname="X" dstnodeid="25" dstpinname="Y Input Value">
    </LINK>
    <LINK srcnodeid="87" srcpinname="Y" dstnodeid="24" dstpinname="Y Input Value">
-   </LINK>
-   <NODE systemname="IOBox (Value Advanced)" nodename="IOBox (Value Advanced)" componentmode="InABox" id="88">
-   <BOUNDS type="Node" left="12450" top="1680" width="100" height="100">
-   </BOUNDS>
-   <BOUNDS type="Box" left="12450" top="1680" width="480" height="480">
-   </BOUNDS>
-   <PIN pinname="Value Type" slicecount="1" values="Boolean">
-   </PIN>
-   <PIN pinname="Behavior" slicecount="1" values="Toggle">
-   </PIN>
-   <PIN pinname="Y Output Value" visible="1">
-   </PIN>
-   <PIN pinname="Descriptive Name" slicecount="1" values="|Midi Out On|">
-   </PIN>
-   <PIN pinname="X Input Value" slicecount="1" values="1">
-   </PIN>
-   <PIN pinname="Y Input Value" slicecount="1" values="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="88" srcpinname="Y Output Value" dstnodeid="68" dstpinname="Do Send">
    </LINK>
    <NODE systemname="Count (Value)" nodename="Count (Value)" componentmode="Hidden" id="89">
    <BOUNDS type="Node" left="10335" top="8445" width="100" height="100">
@@ -1165,5 +1145,15 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="125" srcpinname="Output Enum" dstnodeid="68" dstpinname="Midi Output Port">
+   </LINK>
+   <NODE systemname="Change (Animation)" nodename="Change (Animation)" componentmode="Hidden" id="126">
+   <BOUNDS type="Node" left="11370" top="8700" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Input" visible="1">
+   </PIN>
+   <PIN pinname="OnChange" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="69" srcpinname="Output" dstnodeid="126" dstpinname="Input">
    </LINK>
    </PATCH>

@@ -1,5 +1,5 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta33.1.dtd" >
-   <PATCH nodename="E:\GridNinja\Patches\modules\MonomeAppHost.v4p" systemname="MonomeAppHost" filename="E:\GridNinja\Patches\Modules\MonomeAppHost.v4p" scrollx="0" scrolly="11400">
+   <PATCH nodename="E:\GridNinja\Patches\modules\MonomeAppHost.v4p" systemname="MonomeAppHost" filename="E:\GridNinja\Patches\Modules\MonomeAppHost.v4p" scrollx="6285" scrolly="4935">
    <NODE systemname="MonomeInput" filename="MonomeInput.v4p" nodename="MonomeInput.v4p" componentmode="Hidden" id="0">
    <BOUNDS type="Node" left="5143" top="1835" width="0" height="0">
    </BOUNDS>
@@ -331,7 +331,7 @@
    </PIN>
    <PIN pinname="Input 2" slicecount="1" values="48">
    </PIN>
-   <PIN pinname="Midi Output Port" slicecount="1" values="|LoopBe Internal MIDI|">
+   <PIN pinname="Midi Output Port" slicecount="1" visible="1" values="|LoopBe Internal MIDI|">
    </PIN>
    <PIN pinname="Channel" slicecount="1" visible="1" values="0">
    </PIN>
@@ -361,9 +361,9 @@
    </PIN>
    <PIN pinname="Input 5" visible="1">
    </PIN>
-   <PIN pinname="Input 6" visible="1">
+   <PIN pinname="Input 6" visible="1" slicecount="1" values="0">
    </PIN>
-   <PIN pinname="Input 7" visible="1">
+   <PIN pinname="Input 7" visible="1" slicecount="1" values="0">
    </PIN>
    </NODE>
    <NODE systemname="Faders" filename="Faders.v4p" nodename="Faders.v4p" componentmode="Hidden" id="32">
@@ -753,7 +753,7 @@
    <NODE systemname="Keyboard" filename="Keyboard.v4p" nodename="Modules\Keyboard.v4p" componentmode="Hidden" id="62">
    <BOUNDS type="Node" left="11865" top="12645" width="100" height="100">
    </BOUNDS>
-   <BOUNDS type="Window" left="10140" top="2490" width="23010" height="11640">
+   <BOUNDS type="Window" left="2385" top="2220" width="23010" height="11640">
    </BOUNDS>
    <PIN pinname="Monome Input" visible="1">
    </PIN>
@@ -770,6 +770,10 @@
    <PIN pinname="Keybard Midi Offset" visible="1" slicecount="1" values="0">
    </PIN>
    <PIN pinname="Midi Output Port" visible="1">
+   </PIN>
+   <PIN pinname="MidiClock Enabled" visible="1">
+   </PIN>
+   <PIN pinname="Midi Input Port" visible="1">
    </PIN>
    </NODE>
    <NODE systemname="Switch (Value Input)" nodename="Switch (Value Input)" componentmode="Hidden" id="63">
@@ -1311,6 +1315,10 @@
    </PIN>
    <PIN pinname="Midi Output Port" visible="1">
    </PIN>
+   <PIN pinname="MidiClock Enabled" visible="1">
+   </PIN>
+   <PIN pinname="Midi Input Port" visible="1">
+   </PIN>
    </NODE>
    <LINK srcnodeid="48" srcpinname="Output Bin Size" dstnodeid="93" dstpinname="Monome Input BinSize" hiddenwhenlocked="1">
    </LINK>
@@ -1340,47 +1348,7 @@
    </LINK>
    <LINK srcnodeid="93" srcpinname="Output" dstnodeid="31" dstpinname="Input 5">
    </LINK>
-   <NODE systemname="Keyboard-Scale" filename="Keyboard-Scale.v4p" nodename="Modules\Keyboard-Scale.v4p" componentmode="Hidden" id="96">
-   <BOUNDS type="Node" left="16425" top="12765" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Monome Input" visible="1">
-   </PIN>
-   <PIN pinname="Monome Input BinSize" visible="1">
-   </PIN>
-   <PIN pinname="Rows Columns Count" visible="1">
-   </PIN>
-   <PIN pinname="Output" visible="1">
-   </PIN>
-   </NODE>
-   <NODE systemname="Polygome" filename="Polygome.v4p" nodename="Modules\Polygome.v4p" componentmode="Hidden" id="97">
-   <BOUNDS type="Node" left="18510" top="12765" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Monome Input" visible="1">
-   </PIN>
-   <PIN pinname="Monome Input BinSize" visible="1">
-   </PIN>
-   <PIN pinname="Rows Columns Count" visible="1">
-   </PIN>
-   <PIN pinname="Output" visible="1">
-   </PIN>
-   </NODE>
    <LINK srcnodeid="49" srcpinname="Output 5" dstnodeid="93" dstpinname="Monome Input">
-   </LINK>
-   <LINK srcnodeid="49" srcpinname="Output 6" dstnodeid="96" dstpinname="Monome Input">
-   </LINK>
-   <LINK srcnodeid="48" srcpinname="Output Bin Size" dstnodeid="96" dstpinname="Monome Input BinSize" hiddenwhenlocked="1">
-   </LINK>
-   <LINK srcnodeid="52" srcpinname="Y Output Value" dstnodeid="96" dstpinname="Rows Columns Count" hiddenwhenlocked="1">
-   </LINK>
-   <LINK srcnodeid="96" srcpinname="Output" dstnodeid="31" dstpinname="Input 6">
-   </LINK>
-   <LINK srcnodeid="49" srcpinname="Output 7" dstnodeid="97" dstpinname="Monome Input">
-   </LINK>
-   <LINK srcnodeid="48" srcpinname="Output Bin Size" dstnodeid="97" dstpinname="Monome Input BinSize" hiddenwhenlocked="1">
-   </LINK>
-   <LINK srcnodeid="52" srcpinname="Y Output Value" dstnodeid="97" dstpinname="Rows Columns Count" hiddenwhenlocked="1">
-   </LINK>
-   <LINK srcnodeid="97" srcpinname="Output" dstnodeid="31" dstpinname="Input 7">
    </LINK>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="98" systemname="IOBox (Enumerations)">
    <BOUNDS type="Box" left="18225" top="6780" width="1590" height="270">
@@ -1391,7 +1359,7 @@
    </PIN>
    <PIN pinname="Output Enum" visible="1">
    </PIN>
-   <PIN pinname="Descriptive Name" slicecount="1" values="|Midi Input Port|">
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Midi Output Port|">
    </PIN>
    </NODE>
    <LINK srcnodeid="98" srcpinname="Output Enum" dstnodeid="32" dstpinname="Midi Output Port">
@@ -1453,5 +1421,193 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="101" srcpinname="Y Output Value" dstnodeid="93" dstpinname="Keybard Midi Offset">
+   </LINK>
+   <LINK srcnodeid="98" srcpinname="Output Enum" dstnodeid="30" dstpinname="Midi Output Port">
+   </LINK>
+   <NODE systemname="Polygome" filename="Polygome.v4p" nodename="Polygome.v4p" componentmode="Hidden" id="97">
+   <BOUNDS type="Node" left="18510" top="12765" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Monome Input" visible="1">
+   </PIN>
+   <PIN pinname="Monome Input BinSize" visible="1">
+   </PIN>
+   <PIN pinname="Rows Columns Count" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <PIN pinname="Midi Input Port" visible="1">
+   </PIN>
+   <BOUNDS type="Window" left="2265" top="4140" width="24300" height="11700">
+   </BOUNDS>
+   <PIN pinname="Midi Output Port" visible="1">
+   </PIN>
+   <PIN pinname="MidiClock Enabled" visible="1">
+   </PIN>
+   <PIN pinname="Keybard Midi Offset" slicecount="1" values="0" visible="1">
+   </PIN>
+   <PIN pinname="Baseote" slicecount="1" visible="1" values="0">
+   </PIN>
+   <PIN pinname="ScaleSelect" visible="1">
+   </PIN>
+   <PIN pinname="Channel Keyboard" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="49" srcpinname="Output 7" dstnodeid="97" dstpinname="Monome Input">
+   </LINK>
+   <LINK srcnodeid="48" srcpinname="Output Bin Size" dstnodeid="97" dstpinname="Monome Input BinSize" hiddenwhenlocked="1">
+   </LINK>
+   <LINK srcnodeid="52" srcpinname="Y Output Value" dstnodeid="97" dstpinname="Rows Columns Count" hiddenwhenlocked="1">
+   </LINK>
+   <LINK srcnodeid="97" srcpinname="Output" dstnodeid="31" dstpinname="Input 7">
+   </LINK>
+   <LINK srcnodeid="98" srcpinname="Output Enum" dstnodeid="97" dstpinname="Midi Output Port">
+   </LINK>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="102" systemname="IOBox (Enumerations)">
+   <BOUNDS type="Box" left="20865" top="11625" width="1590" height="270">
+   </BOUNDS>
+   <BOUNDS type="Node" left="20865" top="11625" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="Minor">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Polygome ScaleSelect|">
+   </PIN>
+   <PIN pinname="Output Enum" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="102" srcpinname="Output Enum" dstnodeid="97" dstpinname="ScaleSelect">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="103" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="21990" top="12015" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="21990" top="12015" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="Baseote">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="103" srcpinname="Y Output Value" dstnodeid="97" dstpinname="Baseote">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="104" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="20790" top="10200" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="20790" top="10200" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="4">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Polygome 2 Channel Keyboard|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="104" srcpinname="Y Output Value" dstnodeid="97" dstpinname="Channel Keyboard">
+   </LINK>
+   <NODE systemname="Polygome" filename="Polygome.v4p" nodename="Polygome.v4p" componentmode="Hidden" id="96">
+   <BOUNDS type="Node" left="16425" top="12765" width="100" height="100">
+   </BOUNDS>
+   <PIN pinname="Monome Input" visible="1">
+   </PIN>
+   <PIN pinname="Monome Input BinSize" visible="1">
+   </PIN>
+   <PIN pinname="Rows Columns Count" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   <BOUNDS type="Window" left="9075" top="1230" width="19725" height="13800">
+   </BOUNDS>
+   <PIN pinname="MidiClock Enabled" visible="1">
+   </PIN>
+   <PIN pinname="Midi Input Port" visible="1">
+   </PIN>
+   <PIN pinname="Midi Output Port" visible="1">
+   </PIN>
+   <PIN pinname="Channel Keyboard" visible="1">
+   </PIN>
+   <PIN pinname="ScaleSelect" visible="1">
+   </PIN>
+   <PIN pinname="Baseote" visible="1">
+   </PIN>
+   <PIN pinname="Keybard Midi Offset" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="49" srcpinname="Output 6" dstnodeid="96" dstpinname="Monome Input">
+   </LINK>
+   <LINK srcnodeid="48" srcpinname="Output Bin Size" dstnodeid="96" dstpinname="Monome Input BinSize" hiddenwhenlocked="1">
+   </LINK>
+   <LINK srcnodeid="52" srcpinname="Y Output Value" dstnodeid="96" dstpinname="Rows Columns Count" hiddenwhenlocked="1">
+   </LINK>
+   <LINK srcnodeid="96" srcpinname="Output" dstnodeid="31" dstpinname="Input 6">
+   </LINK>
+   <LINK srcnodeid="98" srcpinname="Output Enum" dstnodeid="96" dstpinname="Midi Output Port">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="106" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="20460" top="8940" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="20460" top="8940" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="3">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Polygome 1 Channel Keyboard|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="106" srcpinname="Y Output Value" dstnodeid="96" dstpinname="Channel Keyboard">
+   </LINK>
+   <LINK srcnodeid="102" srcpinname="Output Enum" dstnodeid="96" dstpinname="ScaleSelect">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="107" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="22080" top="12300" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="22080" top="12300" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|PG Keybard2 Midi Offset Midi Offset|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="107" srcpinname="Y Output Value" dstnodeid="97" dstpinname="Keybard Midi Offset">
+   </LINK>
+   <LINK srcnodeid="103" srcpinname="Y Output Value" dstnodeid="96" dstpinname="Baseote">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="108" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="21300" top="10575" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="21300" top="10575" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="0">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|PG Keybard Midi Offset|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="108" srcpinname="Y Output Value" dstnodeid="96" dstpinname="Keybard Midi Offset">
    </LINK>
    </PATCH>

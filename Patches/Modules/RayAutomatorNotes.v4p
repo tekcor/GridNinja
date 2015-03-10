@@ -1,5 +1,5 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta33.1.dtd" >
-   <PATCH nodename="E:\GridNinja\Patches\modules\RayAutomatorNotes.v4p" systemname="RayAutomatorNotes" filename="E:\TekcorLivePerformance_Debug_16\Thirdparty\GridNinja\Modules\RayAutomatorNotes.v4p" scrollx="5010" scrolly="-360">
+   <PATCH nodename="E:\GridNinja\Patches\modules\RayAutomatorNotes.v4p" systemname="RayAutomatorNotes" filename="E:\TekcorLivePerformance_Debug_16\Thirdparty\GridNinja\Modules\RayAutomatorNotes.v4p" scrollx="5010" scrolly="17280">
    <BOUNDS type="Window" left="720" top="5850" width="27525" height="11130">
    </BOUNDS>
    <NODE id="166" nodename="LinearSpread (Spreads)" systemname="LinearSpread (Spreads)">

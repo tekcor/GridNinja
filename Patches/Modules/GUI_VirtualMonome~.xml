@@ -1,11 +1,11 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta33.1.dtd" >
-   <PATCH nodename="E:\GridNinja\Patches\Modules\GUI_VirtualMonome.v4p" scrollx="0" scrolly="2880" systemname="GUI_VirtualMonome" filename="E:\GridNinja\Patches\Modules\GUI_VirtualMonome.v4p">
+   <PATCH nodename="E:\GridNinja\Patches\modules\GUI_VirtualMonome.v4p" scrollx="0" scrolly="2880" systemname="GUI_VirtualMonome" filename="E:\GridNinja\Patches\Modules\GUI_VirtualMonome.v4p">
    <NODE systemname="Renderer (DX11)" filename="%VVVV%\packs\dx11\nodes\plugins\VVVV.DX11.Nodes.dll" nodename="Renderer (DX11)" componentmode="InAWindow" id="0">
    <BOUNDS type="Node" left="1500" top="8555" width="100" height="100">
    </BOUNDS>
    <BOUNDS type="Box" left="1500" top="8555" width="6000" height="4500">
    </BOUNDS>
-   <BOUNDS type="Window" left="720" top="5910" width="11745" height="6810">
+   <BOUNDS type="Window" left="0" top="1545" width="15495" height="8970">
    </BOUNDS>
    <PIN pinname="Layers" visible="1">
    </PIN>

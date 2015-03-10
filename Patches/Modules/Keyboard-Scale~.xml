@@ -1,5 +1,5 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta33.1.dtd" >
-   <PATCH nodename="E:\GridNinja\Patches\modules\Keyboard-Scale.v4p" scrollx="14595" scrolly="15585" systemname="Keyboard-Scale" filename="C:\VVVV\VVVV_Projects\GridNinja\Patches\Modules\Keyboard-Scale.v4p">
+   <PATCH nodename="E:\GridNinja\Patches\modules\Keyboard-Scale.v4p" scrollx="13275" scrolly="13050" systemname="Keyboard-Scale" filename="C:\VVVV\VVVV_Projects\GridNinja\Patches\Modules\Keyboard-Scale.v4p">
    <BOUNDS type="Window" left="9075" top="1230" width="19725" height="13800">
    </BOUNDS>
    <NODE id="119" nodename="LinearSpread (Spreads)" systemname="LinearSpread (Spreads)">
@@ -975,7 +975,7 @@
    </PIN>
    <PIN pinname="Channel" visible="1">
    </PIN>
-   <PIN pinname="Midi Output Port" slicecount="1" visible="1" values="|LoopBe Internal MIDI|">
+   <PIN pinname="Midi Output Port" slicecount="1" values="|LoopBe Internal MIDI|" visible="1">
    </PIN>
    <PIN pinname="Play" visible="1">
    </PIN>
@@ -1126,6 +1126,18 @@
    <PIN pinname="Precision" slicecount="1" values="4">
    </PIN>
    <PIN pinname="Y Input Value" slicecount="1" values="0">
+   </PIN>
+   </NODE>
+   <NODE systemname="MidiClock (Devices)" filename="" nodename="MidiClock (Devices)" componentmode="InAWindow" id="46">
+   <BOUNDS type="Node" left="18975" top="18120" width="795" height="270">
+   </BOUNDS>
+   <PIN pinname="Enabled" slicecount="1" values="1" visible="1">
+   </PIN>
+   <PIN pinname="Position in Measure" visible="1">
+   </PIN>
+   <PIN pinname="Measure" visible="1">
+   </PIN>
+   <PIN pinname="Midi Input Port" visible="1">
    </PIN>
    </NODE>
    <NODE systemname="GetSlice (Spreads)" nodename="GetSlice (Spreads)" componentmode="Hidden" id="45">
@@ -1303,6 +1315,20 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="38" srcpinname="Output 1" dstnodeid="33" dstpinname="Input">
+   </LINK>
+   <NODE systemname="Add (Value)" nodename="Add (Value)" componentmode="Hidden" id="32">
+   <BOUNDS type="Node" left="19230" top="18495" width="330" height="270">
+   </BOUNDS>
+   <PIN pinname="Input 1" visible="1">
+   </PIN>
+   <PIN pinname="Input 2" visible="1">
+   </PIN>
+   <PIN pinname="Output" visible="1">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="46" srcpinname="Measure" dstnodeid="32" dstpinname="Input 1">
+   </LINK>
+   <LINK srcnodeid="46" srcpinname="Position in Measure" dstnodeid="32" dstpinname="Input 2">
    </LINK>
    <NODE systemname="OR (Boolean)" nodename="OR (Boolean)" componentmode="Hidden" id="31">
    <BOUNDS type="Node" left="2490" top="6180" width="100" height="100">
@@ -1734,6 +1760,18 @@
    </LINK>
    <PACK Name="addonpack" Version="33.0.0">
    </PACK>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="120" systemname="IOBox (Enumerations)">
+   <BOUNDS type="Box" left="24465" top="13575" width="1590" height="270">
+   </BOUNDS>
+   <BOUNDS type="Node" left="24465" top="13575" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="|LoopBe Internal MIDI|">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Midi Input Port|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="120" srcpinname="Output Enum" dstnodeid="46" dstpinname="Midi Input Port">
+   </LINK>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="121" systemname="IOBox (Enumerations)">
    <BOUNDS type="Box" left="25440" top="14265" width="1590" height="270">
    </BOUNDS>
@@ -1746,40 +1784,38 @@
    </NODE>
    <LINK srcnodeid="121" srcpinname="Output Enum" dstnodeid="55" dstpinname="Midi Output Port">
    </LINK>
-   <NODE systemname="R (Value)" nodename="R (Value)" componentmode="Hidden" id="126">
-   <BOUNDS type="Node" left="21690" top="22665" width="100" height="100">
+   <NODE systemname="FrameDelay (Value)" filename="%VVVV%\lib\nodes\plugins\VVVV.Nodes.dll" nodename="FrameDelay (Value)" componentmode="Hidden" id="122">
+   <BOUNDS type="Node" left="19935" top="18900" width="100" height="100">
    </BOUNDS>
-   <PIN pinname="Receive String" visible="1">
+   <PIN pinname="Input 1" visible="1" slicecount="1" values="0">
    </PIN>
-   <PIN pinname="Input Value" visible="1">
+   <PIN pinname="Output 1" visible="1">
    </PIN>
    </NODE>
-   <NODE systemname="String2Enum (Enumerations)" nodename="String2Enum (Enumerations)" componentmode="Hidden" id="125">
-   <BOUNDS type="Node" left="21750" top="22110" width="100" height="100">
-   </BOUNDS>
-   <PIN pinname="Enum" visible="1">
-   </PIN>
-   <PIN pinname="String Value" visible="1">
-   </PIN>
-   </NODE>
-   <LINK srcnodeid="125" srcpinname="Enum" dstnodeid="126" dstpinname="Receive String">
+   <LINK srcnodeid="32" srcpinname="Output" dstnodeid="122" dstpinname="Input 1">
    </LINK>
-   <NODE nodename="IOBox (String)" componentmode="InABox" id="124" systemname="IOBox (String)">
-   <BOUNDS type="Box" left="21930" top="21555" width="795" height="240">
+   <LINK srcnodeid="122" srcpinname="Output 1" dstnodeid="18" dstpinname="Time">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="123" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="25965" top="15135" width="480" height="480">
    </BOUNDS>
-   <BOUNDS type="Node" left="21930" top="21555" width="0" height="0">
+   <BOUNDS type="Node" left="25965" top="15135" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Input String" slicecount="1" visible="1" values="MidiClockTime">
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="1">
    </PIN>
-   <PIN pinname="Default" slicecount="1" values="(nil)">
+   <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
-   <PIN pinname="File Mask" slicecount="1" values="||">
+   <PIN pinname="Precision" slicecount="1" values="4">
    </PIN>
-   <PIN pinname="Maximum Characters" slicecount="1" values="-1">
+   <PIN pinname="Value Type" slicecount="1" values="Boolean">
+   </PIN>
+   <PIN pinname="Behavior" slicecount="1" values="Toggle">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|MidiClock Enabled|">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
    </PIN>
    </NODE>
-   <LINK srcnodeid="124" srcpinname="Output String" dstnodeid="125" dstpinname="String Value">
-   </LINK>
-   <LINK srcnodeid="126" srcpinname="Input Value" dstnodeid="18" dstpinname="Time">
+   <LINK srcnodeid="123" srcpinname="Y Output Value" dstnodeid="46" dstpinname="Enabled">
    </LINK>
    </PATCH>

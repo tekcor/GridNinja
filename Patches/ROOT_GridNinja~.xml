@@ -1,13 +1,13 @@
 <!DOCTYPE PATCH  SYSTEM "http://vvvv.org/versions/vvvv45beta33.1.dtd" >
-   <PATCH nodename="E:\GridNinja\Patches\ROOT_GridNinja.v4p" systemname="ROOT_GridNinja" filename="E:\GridNinja\Patches\ROOT_GridNinja.v4p" scrollx="0" scrolly="0" bgcolor="4539717">
-   <BOUNDS type="Window" left="15495" top="1545" width="8505" height="11355">
+   <PATCH nodename="E:\GridNinja\Patches\ROOT_GridNinja.v4p" systemname="ROOT_GridNinja" filename="E:\GridNinja\Patches\ROOT_GridNinja.v4p" scrollx="2100" scrolly="0" bgcolor="4539717">
+   <BOUNDS type="Window" left="19740" top="3630" width="8865" height="11355">
    </BOUNDS>
    <NODE systemname="MonomeAppHost" filename="modules\MonomeAppHost.v4p" nodename="Modules\MonomeAppHost.v4p" componentmode="Hidden" id="71" hiddenwhenlocked="1">
    <BOUNDS type="Node" left="21" top="9329" width="0" height="0">
    </BOUNDS>
    <BOUNDS type="Box" left="0" top="8800" width="15865" height="21802">
    </BOUNDS>
-   <BOUNDS type="Window" left="7890" top="990" width="15860" height="10940">
+   <BOUNDS type="Window" left="4080" top="1380" width="15855" height="10935">
    </BOUNDS>
    <PIN pinname="Sync MIDI/OSC/LFO" slicecount="1" values="2">
    </PIN>
@@ -48,6 +48,8 @@
    <PIN pinname="Ray Note Offset" visible="1">
    </PIN>
    <PIN pinname="Keybard 2 Midi Offset" visible="1">
+   </PIN>
+   <PIN pinname="Midi Output Port" visible="1">
    </PIN>
    </NODE>
    <NODE systemname="MainLoop (VVVV)" nodename="MainLoop (VVVV)" componentmode="Hidden" id="-6" hiddenwhenlocked="1">
@@ -128,6 +130,16 @@
    <PIN pinname="Columns" visible="1">
    </PIN>
    <PIN pinname="Evaluate" visible="1" pintype="Input" slicecount="1" values="1">
+   </PIN>
+   <PIN pinname="Midi Output Port" visible="1">
+   </PIN>
+   <PIN pinname="Polygome Channel Keyboard" visible="1">
+   </PIN>
+   <PIN pinname="Polygome ScaleSelect" visible="1">
+   </PIN>
+   <PIN pinname="Baseote" visible="1">
+   </PIN>
+   <PIN pinname="Polygome 1 Channel Keyboard" visible="1">
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="8" systemname="IOBox (Value Advanced)">
@@ -223,7 +235,7 @@
    </BOUNDS>
    <PIN pinname="Y Output Value" visible="1">
    </PIN>
-   <PIN pinname="Y Input Value" slicecount="1" values="2">
+   <PIN pinname="Y Input Value" slicecount="1" values="0">
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="|Sync Midi / OSC / LFO|">
    </PIN>
@@ -237,7 +249,7 @@
    </BOUNDS>
    <BOUNDS type="Box" left="1920" top="2160" width="6195" height="5095">
    </BOUNDS>
-   <BOUNDS type="Window" left="9900" top="4080" width="12870" height="8520">
+   <BOUNDS type="Window" left="1440" top="3885" width="12870" height="8520">
    </BOUNDS>
    <PIN pinname="Period" slicecount="1" visible="1" values="0.11">
    </PIN>
@@ -287,7 +299,7 @@
    </BOUNDS>
    <PIN pinname="GUI Sliders Midi Channel" visible="1">
    </PIN>
-   <PIN pinname="Midi Output Port" visible="1">
+   <PIN pinname="Midi Output Port" visible="1" slicecount="1" values="|LoopBe Internal MIDI|">
    </PIN>
    <PIN pinname="Show IP Address" visible="1">
    </PIN>
@@ -447,9 +459,9 @@
    </BOUNDS>
    <BOUNDS type="Node" left="1020" top="1860" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Input Enum" slicecount="1" visible="1" values="|LoopBe Internal MIDI|">
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="|In From MIDI Yoke:  1|">
    </PIN>
-   <PIN pinname="Descriptive Name" slicecount="1" values="|Midi Input Port - Midi Input Port|">
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Midi Input Port (eg Ableton)|">
    </PIN>
    </NODE>
    <LINK srcnodeid="163" srcpinname="Output Enum" dstnodeid="120" dstpinname="Midi Input Port - Midi Input Port" hiddenwhenlocked="1" linkstyle="VHV">
@@ -863,11 +875,11 @@
    </PIN>
    </NODE>
    <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="196" systemname="IOBox (Enumerations)">
-   <BOUNDS type="Box" left="3945" top="2325" width="2010" height="315">
+   <BOUNDS type="Box" left="3945" top="2340" width="2010" height="315">
    </BOUNDS>
-   <BOUNDS type="Node" left="3945" top="2325" width="0" height="0">
+   <BOUNDS type="Node" left="3945" top="2340" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Input Enum" slicecount="1" visible="1" values="|LoopBe Internal MIDI|">
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="|Out To MIDI Yoke:  2|">
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="|Midi Output Port|">
    </PIN>
@@ -879,7 +891,7 @@
    </BOUNDS>
    <BOUNDS type="Node" left="5340" top="2865" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="48">
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="4">
    </PIN>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -1005,7 +1017,7 @@
    </BOUNDS>
    <BOUNDS type="Node" left="4875" top="3780" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="48">
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="4">
    </PIN>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -1231,6 +1243,16 @@
    </PIN>
    <PIN pinname="Evaluate" visible="1" pintype="Input">
    </PIN>
+   <PIN pinname="Midi Output Port" visible="1">
+   </PIN>
+   <PIN pinname="Polygome Channel Keyboard" visible="1">
+   </PIN>
+   <PIN pinname="Polygome ScaleSelect" visible="1">
+   </PIN>
+   <PIN pinname="Baseote" visible="1">
+   </PIN>
+   <PIN pinname="Polygome 1 Channel Keyboard" visible="1">
+   </PIN>
    </NODE>
    <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="220" systemname="IOBox (Value Advanced)">
    <BOUNDS type="Box" left="5715" top="6240" width="810" height="375">
@@ -1309,7 +1331,7 @@
    </BOUNDS>
    <BOUNDS type="Node" left="3945" top="7215" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Input Enum" slicecount="1" visible="1" values="|LoopBe Internal MIDI|">
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="|Out To MIDI Yoke:  2|">
    </PIN>
    <PIN pinname="Descriptive Name" slicecount="1" values="|Midi Output Port|">
    </PIN>
@@ -1321,7 +1343,7 @@
    </BOUNDS>
    <BOUNDS type="Node" left="5340" top="7755" width="0" height="0">
    </BOUNDS>
-   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="48">
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="98">
    </PIN>
    <PIN pinname="Units" slicecount="1" values="||">
    </PIN>
@@ -1699,5 +1721,133 @@
    </PIN>
    </NODE>
    <LINK srcnodeid="225" srcpinname="Y Output Value" dstnodeid="150" dstpinname="Show Cursor">
+   </LINK>
+   <LINK srcnodeid="196" srcpinname="Output Enum" dstnodeid="10" dstpinname="Midi Output Port" linkstyle="VHV" hiddenwhenlocked="1">
+   <LINKPOINT x="4005" y="3900">
+   </LINKPOINT>
+   <LINKPOINT x="6720" y="3900">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="168" srcpinname="Output Enum" dstnodeid="71" dstpinname="Midi Output Port" linkstyle="VHV" hiddenwhenlocked="1">
+   <LINKPOINT x="75" y="7208">
+   </LINKPOINT>
+   <LINKPOINT x="2805" y="7208">
+   </LINKPOINT>
+   </LINK>
+   <LINK srcnodeid="217" srcpinname="Output Enum" dstnodeid="221" dstpinname="Midi Output Port" linkstyle="VHV" hiddenwhenlocked="1">
+   <LINKPOINT x="4005" y="8783">
+   </LINKPOINT>
+   <LINKPOINT x="6720" y="8783">
+   </LINKPOINT>
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="227" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="7245" top="4650" width="720" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="7245" top="4650" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="5">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Polygome 2 Channel Keyboard|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="227" srcpinname="Y Output Value" dstnodeid="10" dstpinname="Polygome 2 Channel Keyboard">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="228" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="8175" top="9495" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="8175" top="9495" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="9">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Polygome 2 Channel Keyboard|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="228" srcpinname="Y Output Value" dstnodeid="221" dstpinname="Polygome 2 Channel Keyboard">
+   </LINK>
+   <NODE nodename="IOBox (Enumerations)" componentmode="InABox" id="229" systemname="IOBox (Enumerations)">
+   <BOUNDS type="Box" left="7275" top="3405" width="1590" height="270">
+   </BOUNDS>
+   <BOUNDS type="Node" left="7275" top="3405" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Input Enum" slicecount="1" visible="1" values="HarmonicMaj">
+   </PIN>
+   <PIN pinname="Output Enum" visible="1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Polygome ScaleSelect - Polygome ScaleSelect|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="229" srcpinname="Output Enum" dstnodeid="10" dstpinname="Polygome ScaleSelect">
+   </LINK>
+   <LINK srcnodeid="229" srcpinname="Output Enum" dstnodeid="221" dstpinname="Polygome ScaleSelect">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="230" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="7440" top="2700" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="7440" top="2700" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="3">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Y Output Value" visible="1">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Baseote - Baseote|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="230" srcpinname="Y Output Value" dstnodeid="221" dstpinname="Baseote">
+   </LINK>
+   <LINK srcnodeid="230" srcpinname="Y Output Value" dstnodeid="10" dstpinname="Baseote">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="231" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="7365" top="3945" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="7365" top="3945" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="4">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Polygome 1 Channel Keyboard|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="231" srcpinname="Y Output Value" dstnodeid="10" dstpinname="Polygome 1 Channel Keyboard">
+   </LINK>
+   <NODE nodename="IOBox (Value Advanced)" componentmode="InABox" id="232" systemname="IOBox (Value Advanced)">
+   <BOUNDS type="Box" left="8235" top="8670" width="795" height="240">
+   </BOUNDS>
+   <BOUNDS type="Node" left="8235" top="8670" width="0" height="0">
+   </BOUNDS>
+   <PIN pinname="Y Input Value" slicecount="1" visible="1" values="8">
+   </PIN>
+   <PIN pinname="Units" slicecount="1" values="||">
+   </PIN>
+   <PIN pinname="Precision" slicecount="1" values="4">
+   </PIN>
+   <PIN pinname="Value Type" slicecount="1" values="Integer">
+   </PIN>
+   <PIN pinname="Descriptive Name" slicecount="1" values="|Polygome 1 Channel Keyboard|">
+   </PIN>
+   </NODE>
+   <LINK srcnodeid="232" srcpinname="Y Output Value" dstnodeid="221" dstpinname="Polygome 1 Channel Keyboard">
    </LINK>
    </PATCH>
