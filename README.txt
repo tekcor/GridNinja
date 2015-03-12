@@ -41,11 +41,18 @@ There are two modes and you toggle between them by pressing the button left of t
 First mode: Toggle center points
 Second mode: Toggle Intersection points
 
-[4] Keyboard
+[4] + [5] Keyboard
 A Keyboard with a looper. All C's are marked as glowing buttons. Pressing the first top button triggers the looper. It loops 16 bars and then starts to repeat and also indicates what is repeated. Stopping the loop works by pressing both the first and the second button in the first row.
+
+[6] + [7] AutoScale Looper Keyboard (Polygome Clone)
+You can select the scale from almost all existing scales and a basenote in the VVVV patch.
+It loops what you play while you are playing. Also quantisation is used.
+
 
 Personal to do list / stuff that was not ready for release but is cooking:
 - Something inspired by Polygome and Press Caffee
 - External App Routing
 - Standalone Sound Engine
 - MLR with the Standalone Sound Engine
+
+
